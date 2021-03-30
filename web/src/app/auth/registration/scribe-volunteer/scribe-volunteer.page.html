@@ -1,0 +1,129 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="login"></ion-back-button>
+        </ion-buttons>
+        <ion-title>Volunteer Registration</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-card>
+        <form [formGroup]="registrationForm" (ngSubmit)="onRegistrationSubmission()">
+            <ion-grid>
+                <ion-row>
+                    <ion-col size-sm="6" offset-sm="3">
+                        <ion-item>
+                            <ion-label position="floating">Name</ion-label>
+                            <ion-input type="text" formControlName="name"></ion-input>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col size-sm="6" offset-sm="3">
+                        <ion-item>
+                            <ion-label position="floating">E-Mail</ion-label>
+                            <ion-input type="email" formControlName="email"></ion-input>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col formGroupName="passwords" class="passwords_wrapper">
+                        <ion-row>
+                            <ion-col size-sm="6" offset-sm="3">
+                                <ion-item>
+                                    <ion-label position="floating">Password</ion-label>
+                                    <ion-input type="password" formControlName="password"></ion-input>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col size-sm="6" offset-sm="3">
+                                <ion-item>
+                                    <ion-label position="floating">Confirm Password</ion-label>
+                                    <ion-input type="password" formControlName="confirmPassword"></ion-input>
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                        <p class="error-msg" *ngIf="registrationForm.get('passwords').get('password').value.trim() && registrationForm.get('passwords').get('confirmPassword')?.value.trim() && !registrationForm.get('passwords').valid">Password and confirm passwords are not matching.</p>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col size-sm="6" offset-sm="3">
+                        <ion-item>
+                            <ion-label position="floating">Gender</ion-label>
+                            <ion-select formControlName="gender">
+                                <ion-select-option value="f">Female</ion-select-option>
+                                <ion-select-option value="m">Male</ion-select-option>
+                                <ion-select-option value="o">Other</ion-select-option>
+                            </ion-select>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col size-sm="6" offset-sm="3">
+                        <ion-item>
+                            <ion-label position="floating">Mobile Number</ion-label>
+                            <ion-input type="tel" formControlName="mobileno"></ion-input>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col size-sm="6" offset-sm="3">
+                        <ion-item>
+                            <ion-label position="floating">Degree</ion-label>
+                            <ion-input type="text" formControlName="degree"></ion-input>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+                <!-- <ion-row>
+          <ion-col size-sm="6" offset-sm="3">
+            <ion-item>
+              <ion-label position="floating">Specialization</ion-label>
+              <ion-input type="text" formControlName="specialization"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row> -->
+                <ion-row>
+                    <ion-col size-sm="6" offset-sm="3">
+                        <ion-item>
+                            <ion-label position="floating">Languages Known</ion-label>
+                            <ion-textarea rows="3" formControlName="languagesKnown" autocorrect></ion-textarea>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col size-sm="6" offset-sm="3">
+                        <ion-item>
+                            <ion-label position="floating">City</ion-label>
+                            <ion-input type="text" formControlName="city"></ion-input>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col size-sm="6" offset-sm="3">
+                        <ion-item>
+                            <ion-label position="floating">State</ion-label>
+                            <ion-input type="text" formControlName="state"></ion-input>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col size-sm="6" offset-sm="3">
+                        <ion-item>
+                            <ion-label position="floating">Pincode</ion-label>
+                            <ion-input type="number" formControlName="pincode"></ion-input>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+                <ion-row class="ion-justify-content-evenly">
+                    <ion-col size-sm="6" offset-sm="3">
+                        <ion-button type="reset" color="secondary" size="small" fill="outline">Reset</ion-button>
+                        <ion-button type="submit" color="primary" size="small">Register</ion-button>
+                    </ion-col>
+                </ion-row>
+
+            </ion-grid>
+        </form>
+    </ion-card>
+</ion-content>

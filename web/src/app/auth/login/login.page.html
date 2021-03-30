@@ -1,0 +1,49 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>Login</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content style="display: flex;align-items: center;">
+    <ion-card>
+        <!-- <div class="spin" *ngIf="user.loader">
+            <ion-spinner name="bubbles"></ion-spinner>
+        </div> -->
+
+        <form #loginForm="ngForm">
+            <ion-grid>
+                <ion-row>
+                    <ion-col size-sm="6" offset-sm="3">
+                        <ion-list>
+                            <ion-item>
+                                <ion-label position="floating">E-Mail</ion-label>
+                                <ion-input type="email" [(ngModel)]="user.data.username" name="email" required></ion-input>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label position="floating">Password</ion-label>
+                                <ion-input type="password" [(ngModel)]="user.data.password" name="password" required></ion-input>
+                            </ion-item>
+                        </ion-list>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col size-sm="6" offset-sm="3">
+                        <!--  routerLink="/scribe-seeker" -->
+                        <ion-button type="submit" color="primary" expand="block" (click)="login()">Login</ion-button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </form>
+        <div class="overlay" *ngIf="user.loader">
+            <div class="overlay__wrapper">
+                <div class="overlay__spinner">
+                    <ion-spinner name="bubbles"></ion-spinner>
+                </div>
+            </div>
+        </div>
+    </ion-card>
+    <!-- <pre>{{user | json}}</pre> -->
+</ion-content>

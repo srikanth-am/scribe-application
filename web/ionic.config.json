@@ -1,0 +1,7 @@
+{
+    "name": "be-my-scribe",
+    "integrations": {
+        "capacitor": {}
+    },
+    "type": "angular"
+}

@@ -1,0 +1,27 @@
+<ion-list>
+  <ion-list-header lines="inset">
+    <ion-label>Upcoming Exams</ion-label>
+    <ion-input></ion-input>
+  </ion-list-header>
+  <ion-item *ngIf="examList.length">
+    <ion-grid>
+      <ion-row class="header">
+        <ion-col class="header-col">Name</ion-col>
+        <ion-col class="header-col">Date</ion-col>
+        <ion-col class="header-col">Time</ion-col>
+        <ion-col class="header-col"></ion-col>
+      </ion-row>
+      <ion-row class="content">
+        <ion-col>{{'test'}}</ion-col>
+        <ion-col>{{'test'}}</ion-col>
+        <ion-col>{{'test'}}</ion-col>
+        <ion-col class="button-wrapper">
+          <ion-button href="#" fill="clear" size="small">Show More</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+  <div class="ion-text-center" *ngIf="!examList.length">
+    <p>No Results Found</p>
+  </div>
+</ion-list>

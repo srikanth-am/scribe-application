@@ -1,0 +1,5 @@
+<ion-select value="en" (ionChange)="onLangSelect($event)">
+  <ion-select-option
+    [value]="lang.value"
+    *ngFor="let lang of langSupported">{{lang.text}}</ion-select-option>
+</ion-select>

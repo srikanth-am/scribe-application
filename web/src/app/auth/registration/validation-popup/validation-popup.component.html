@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Errors</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="validation-error-wrrapper">
+  <ion-card class="ion-text-center">
+    <ion-text>
+      <h3><ion-icon name="alert-circle-outline" size="large"></ion-icon>{{errors.length}} error(s) prohibited the registration from being saved</h3>
+    </ion-text>
+    <ion-list class="ion-text-left">
+      <ol>
+        <li *ngFor="let error of errors" tabindex="1">
+          {{error}}
+        </li>
+      </ol>
+    </ion-list>
+      <ion-button type="submit" color="primary" size="small" (click)="onCancel()">Close</ion-button>
+  </ion-card>
+</ion-content>

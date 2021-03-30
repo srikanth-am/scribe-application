@@ -1,0 +1,15 @@
+<ion-header [translucent]="true">
+    <ion-toolbar>
+      <app-languages slot="end"></app-languages>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+    <div id="container">
+        <img src="assets/logo.jpg" alt="Logo" width="100">
+        <h1 class="ion-margin">{{'HOME.WELCOME_MSG' | translate}}</h1>
+        <ion-button type="button" color="primary" expand="block" routerLink="/registration/scribe-seeker" class="ion-text-wrap">{{'HOME.SCRIBE_SEEKER_REGISTRATION_BTN_LABEL' | translate}}</ion-button>
+        <ion-button type="button" color="secondary" expand="block" routerLink="/registration/scribe-volunteer" class="ion-text-wrap">{{ 'HOME.SCRIBE_VOLUNTEER_REGISTRATION_BTN_LABEL' | translate }}</ion-button>
+        <ion-button type="button" color="tertiary" expand="block" fill="outline" routerLink="/login">{{ 'HOME.LOGIN_BRN_LABEL' | translate}}</ion-button>
+    </div>
+</ion-content>

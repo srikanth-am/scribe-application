@@ -1,0 +1,9 @@
+ion-footer {
+    display: block;
+    position: fixed;
+    -ms-flex-order: 1;
+    order: 1;
+    width: 100%;
+    z-index: 10;
+    bottom: 0;
+}
