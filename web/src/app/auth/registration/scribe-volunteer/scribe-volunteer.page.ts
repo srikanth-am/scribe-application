@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { RegistrationService } from '../registration.service';
 import { ValidationPopupComponent } from '../validation-popup/validation-popup.component';
-import { LoadingController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
 import { ApiServiceService } from 'src/app/services/api/api-service.service';
 import { Router } from '@angular/router';
 
@@ -20,8 +20,8 @@ export class ScribeVolunteerPage implements OnInit {
         private regService: RegistrationService,
         public loadingController: LoadingController,
         private api: ApiServiceService,
-        private router: Router
-
+        private router: Router,
+        public alertController: AlertController
     ) { }
 
     ngOnInit() {
@@ -93,7 +93,7 @@ export class ScribeVolunteerPage implements OnInit {
             this.volunteer.highest_degree = this.registrationForm.controls['degree'].value;
             this.api.post("/volunteerRegister", this.volunteer).subscribe((res: any) => {
                 if (Object.keys(res).length > 0) {
-                    alert("Registered Successfully");
+                    this.presentAlert();
                     this.router.navigate(['/login']);
                 }
             });
@@ -108,5 +108,11 @@ export class ScribeVolunteerPage implements OnInit {
       });
       await loading.present();
     }
-
+    async presentAlert() {
+        const alert = await this.alertController.create({
+            message: 'Registered Successfully',
+            buttons: ['OK']
+        });
+        await alert.present();
+    }
 }

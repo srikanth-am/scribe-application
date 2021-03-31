@@ -14,8 +14,11 @@ export class ScribeSeekerPage implements OnInit {
    }
 
     ngOnInit() {
+        //this.getData();
+    }
+    ionViewWillEnter() {
         this.getData();
-  }
+    }
     getData() {
         this.api.get("/disabledExamDashboard/"+this.email).subscribe((res: any) => {
             this.examList = res;

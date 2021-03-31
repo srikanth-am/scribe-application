@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoadingController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
 import { RegistrationService } from 'src/app/auth/registration/registration.service';
 import { ApiServiceService } from 'src/app/services/api/api-service.service';
 
@@ -19,11 +19,12 @@ export class AddNewExamPage implements OnInit {
         private regService: RegistrationService,
         private api: ApiServiceService,
         private router: Router,
-        public loadingController: LoadingController
+        public loadingController: LoadingController,
+        public alertController: AlertController
+
     ) {
         this.email = localStorage.getItem('email');
         this.getUser();
-        //alert(this.email);
      }
 
     ngOnInit() {
@@ -74,7 +75,6 @@ export class AddNewExamPage implements OnInit {
     }
     getUser() {
         this.api.get("/disabled/"+this.email).subscribe((res: any) => {
-            console.log(res);
             if (res.id !=undefined) {
                 this.disabledId = res.id;
             }
@@ -97,10 +97,9 @@ export class AddNewExamPage implements OnInit {
             this.exam.disabled_id = this.disabledId;
             this.exam.volunteer_id = '';
             this.api.post("/saveExam", this.exam).subscribe((res: any) => {
-                alert("SUccessfully Added");
+                this.presentAlert();
                 this.router.navigate(['/scribe-seeker']);
             });
-            // console.log(this.exam);?
         } else {
             this.regService.onSubmission(this.addNewExamForm);
         }
@@ -112,5 +111,12 @@ export class AddNewExamPage implements OnInit {
         duration: 500
       });
       await loading.present();
+    }
+    async presentAlert() {
+        const alert = await this.alertController.create({
+            message: 'Successfully Added',
+            buttons: ['OK']
+        });
+        await alert.present();
     }
 }

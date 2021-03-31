@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { RegistrationService } from '../registration.service';
 import { LoadingController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-scribe-seeker',
@@ -17,7 +18,8 @@ export class ScribeSeekerPage implements OnInit {
         private regService: RegistrationService,
         private api: ApiServiceService,
         private router: Router,
-        public loadingController: LoadingController
+        public loadingController: LoadingController,
+        public alertController: AlertController
     ) { }
 
     ngOnInit() {
@@ -55,7 +57,7 @@ export class ScribeSeekerPage implements OnInit {
             this.seeker.data.mobile = this.registrationForm.controls['mobileno'].value;
             this.api.post("/disabledRegister", this.seeker.data).subscribe((res: any) => {
                 if (Object.keys(res).length > 3) {
-                    alert("Registered Successfully");
+                    this.presentAlert();
                     this.router.navigate(['/login']);
                 }
             });
@@ -70,30 +72,11 @@ export class ScribeSeekerPage implements OnInit {
       });
       await loading.present();
     }
-    // async presentLoading() {
-    //     const loading = await this.loadingController.create({
-    //         cssClass: 'my-custom-class',
-    //         message: 'Please wait...',
-    //         //duration: 2000
-    //     });
-    //     await loading.present();
-
-    //     const { role, data } = await loading.onDidDismiss();
-    //     console.log('Loading dismissed!');
-    // }
-
-//   async presentLoadingWithOptions() {
-//     const loading = await this.loadingController.create({
-//       spinner: null,
-//       duration: 5000,
-//       message: 'Click the backdrop to dismiss early...',
-//       translucent: true,
-//       cssClass: 'custom-class custom-loading',
-//       backdropDismiss: true
-//     });
-//     await loading.present();
-
-//     const { role, data } = await loading.onDidDismiss();
-//     console.log('Loading dismissed with role:', role);
-//   }
+    async presentAlert() {
+        const alert = await this.alertController.create({
+            message: 'Registered Successfully',
+            buttons: ['OK']
+        });
+        await alert.present();
+    }
 }
