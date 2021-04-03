@@ -380,9 +380,9 @@ class VolunteerExamDashboard(Resource):
 
 		pincodes.sort()
 		for pin in pincodes:
-			nearby_exams = Exam.query.filter(Exam.exam_area_pincode == pin).all() # Exam.query.filter((Exam.exam_area_pincode == pin)  & (Exam.exam_request_status == "open")).all()
-			print(pin)
-			print(nearby_exams)
+			nearby_exams = Exam.query.filter((Exam.exam_area_pincode == pin)  & (Exam.exam_request_status == "open")).all()
+			# print(pin)
+			# print(nearby_exams)
 			if(nearby_exams):
 				for e in nearby_exams:					
 					exams_list.append(e)
