@@ -360,11 +360,36 @@ class VolunteerExamDashboard(Resource):
 	@jwt_required()
 	def get(self,email):
 		volunteer_user = Volunteer.query.filter_by(email = email).first()
-		id_of_volunteer = volunteer_user.id
+		id_of_volunteer = volunteer_user.id		
 		exams_list = Exam.query.filter((Exam.volunteer_id == id_of_volunteer) & (Exam.exam_request_status == "open")).all()
-		name_json = {}
+		volunteer_pincode = volunteer_user.pincode
 
-		return [exam.json() for exam in exams_list]
+		#add 5 next and prev pincodes neares to volunteer's pincode
+		pincodes = []
+		pincodes.append(volunteer_pincode)
+		temp = volunteer_pincode
+		temp2 = volunteer_pincode	
+		for i in range(0,4):
+			next_pin = temp + 1
+			pincodes.append(next_pin)
+			temp = next_pin
+
+			prev_pin = temp2 - 1
+			pincodes.append(prev_pin)
+			temp2 = prev_pin
+
+		pincodes.sort()
+		for pin in pincodes:
+			nearby_exams = Exam.query.filter((Exam.exam_area_pincode == pin)  & (Exam.exam_request_status == "open")).all()
+			# print(pin)
+			# print(nearby_exams)
+			if(nearby_exams):
+				for e in nearby_exams:					
+					exams_list.append(e)
+				
+		#removing duplicates if any
+		all_exams = list(set(exams_list))
+		return [exam.json() for exam in all_exams]
 
 api.add_resource(DisabledExamDashboard,'/disabledExamDashboard/<email>')
 api.add_resource(VolunteerExamDashboard,'/volunteerExamDashboard/<string:email>')
